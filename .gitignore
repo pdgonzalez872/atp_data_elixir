@@ -22,3 +22,13 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 atp_data_elixir-*.tar
 
+# vim stuff
+*.swp
+*.swo
+*~
+*.sw*
+
+# Tags
+tags
+
+
