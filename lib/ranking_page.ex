@@ -3,13 +3,12 @@ defmodule RankingPage do
   @rankings_base_url "http://www.atpworldtour.com/en/rankings/singles?"
   @rankings_rest_url "&rankRange=1-5000&countryCode=all"
 
-  # sends the request to the correct url
   def call do
-    # result = url
-    # |> build_url
-    # |> fetch_data
-    # |> parse_html
-    # Then pass the result back below
+    build_url(Date.utc_today)
+    |> fetch_data
+    |> player_data
+    |> Enum.map(fn(url) -> RankingPage.parse_individual_element(url) end)
+    |> create_text_file_with_urls(Path.join(["test", "test_data","urls.txt"]))
   end
 
   @doc """
@@ -28,5 +27,32 @@ defmodule RankingPage do
   """
   def last_monday(date) do
     Timex.beginning_of_week(date)
+  end
+
+  @doc """
+  Fetches html from a url
+  """
+  def fetch_data(url) do
+    HTTPoison.start
+    %{body: body} = HTTPoison.get!(url)
+    body
+  end
+
+  @doc """
+  Parses html and returns a list with the players urls
+  """
+  def player_data(html_string) do
+    Floki.find(html_string, ".player-cell a")
+  end
+
+  def parse_individual_element(el) do
+    {_, [{_, url}, {_, _}], [_]} = el
+    url
+  end
+
+  def create_text_file_with_urls(urls, path) do
+    path
+    |> Path.absname
+    |> File.write(Enum.join(urls, "\n"), [:write])
   end
 end
