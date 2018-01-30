@@ -1,12 +1,17 @@
 require IEx
 
 defmodule PlayerPage do
-  def process(url) do
-    # result = url
-    # |> fetch_data
-    # |> parse_html
-    # Then pass the result back below
-    {:ok, url}
+
+  @base_url "http://www.atpworldtour.com"
+
+  def process_player(url) do
+    result = "#{@base_url}#{url}"
+    |> IO.inspect
+    |> fetch_data
+    |> parse_html
+    |> result_to_string
+
+    {:ok, url, result}
   end
 
   def fetch_data(url) do
@@ -53,18 +58,23 @@ defmodule PlayerPage do
   def parse_birthday(html) do
     [{_, [{_, _}], [birthday_dirty]}] = Floki.find(html, ".table-birthday")
 
-    birthday_clean = birthday_dirty
+    birthday_dirty
     |> String.replace("(", "")
     |> String.replace(")", "")
     |> String.replace(".", "-")
     |> String.trim
-
-    birthday_clean
   end
 
   def parse_career_prize_money(html) do
     {_, [{_, _}, {_, _}, {_, _}], [dirty_prize_money]} = Enum.at(Floki.find(html, ".players-stats-table .stat-value"), -1)
+
     dirty_prize_money
     |> String.trim
+    |> String.replace(",", "")
+    |> String.replace("$", "")
+  end
+
+  def result_to_string(%{} = r) do
+    "#{r.ranking}|#{r.first_name}|#{r.last_name}|#{r.country}|#{r.birthday}|#{r.prize_money}"
   end
 end

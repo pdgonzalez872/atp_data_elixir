@@ -8,7 +8,7 @@ defmodule PlayerPageTest do
     test "works in integration" do
 
       "/en/players/rafael-nadal/n409/overview"
-      |> PlayerPage.process
+      |> PlayerPage.process_player
 
       # get a player url
       # combine it with the base url
@@ -27,7 +27,7 @@ defmodule PlayerPageTest do
       |> File.read!
 
       result = PlayerPage.parse_html(html_string)
-      expected = %{birthday: "1981-08-08", country: "SUI", first_name: "Roger", last_name: "Federer", prize_money: "$115,050,482", ranking: "2"}
+      expected = %{birthday: "1981-08-08", country: "SUI", first_name: "Roger", last_name: "Federer", prize_money: "115050482", ranking: "2"}
       assert result == expected
     end
   end
