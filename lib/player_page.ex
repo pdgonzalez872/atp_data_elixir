@@ -18,9 +18,6 @@ defmodule PlayerPage do
   # parses request with library and returns tuple
   # returns  tuple
   def parse_html(html) do
-
-    IEx.pry
-
     %{
       ranking: parse_ranking(html),
       first_name: parse_first_name(html),
@@ -29,7 +26,6 @@ defmodule PlayerPage do
       birthday: parse_birthday(html),
       prize_money: parse_career_prize_money(html)
     }
-
   end
 
   def parse_ranking(html) do

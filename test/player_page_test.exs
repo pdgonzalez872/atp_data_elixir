@@ -27,12 +27,8 @@ defmodule PlayerPageTest do
       |> File.read!
 
       result = PlayerPage.parse_html(html_string)
-      expected = %{
-        birthday: "1981-08-08",
-      }
-
-      assert result == %{}
-
+      expected = %{birthday: "1981-08-08", country: "SUI", first_name: "Roger", last_name: "Federer", prize_money: "$115,050,482", ranking: "2"}
+      assert result == expected
     end
   end
 end
