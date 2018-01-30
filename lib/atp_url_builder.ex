@@ -1,4 +1,0 @@
-defmodule AtpUrlBuilder do
-
-end
-
