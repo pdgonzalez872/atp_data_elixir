@@ -14,7 +14,7 @@ defmodule AtpDataElixir.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger, :timex]
     ]
   end
 
@@ -22,7 +22,8 @@ defmodule AtpDataElixir.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.0"},
-      {:floki, "~> 0.19.0"}
+      {:floki, "~> 0.19.0"},
+      {:timex, "~> 3.0"}
     ]
   end
 end
