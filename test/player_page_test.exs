@@ -4,6 +4,9 @@ defmodule PlayerPageTest do
   use ExUnit.Case
   doctest PlayerPage
 
+  # TODO:
+  # Would be cool to run this only in certain runs
+  @tag :skip
   describe "integration test" do
     test "works in integration" do
 
