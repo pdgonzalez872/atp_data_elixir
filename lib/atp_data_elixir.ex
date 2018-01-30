@@ -6,18 +6,22 @@ defmodule AtpDataElixir do
   require Logger
 
   def main do
-    Logger.info "Starting"
+    Logger.info("Starting")
     start_time = Date.utc_today
 
-    # create url file and retrieve text
+    Logger.info("Fetching ranking page and create URL file")
     {:ok, text} = RankingPage.process
+    Logger.info("Fetch Complete, File created")
 
-    text
+    Logger.info("Fetching player data")
+    list = text
     |> String.split("\n")
-    |> Enum.each(fn(player_url) -> PlayerPage.process_player(player_url) end)
+    |> Enum.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
 
-    # go through file and make requests to each of the players
+    # Let's implement flow now.
 
-    Logger.info "Finished in #{Date.diff(Date.utc_today, start_time)} seconds"
+
+
+    Logger.info("Finished in #{Date.diff(Date.utc_today, start_time)} seconds")
   end
 end
