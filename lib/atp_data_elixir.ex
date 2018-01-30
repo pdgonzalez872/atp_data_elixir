@@ -3,42 +3,21 @@ defmodule AtpDataElixir do
   Documentation for AtpDataElixir.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> AtpDataElixir.hello
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
   require Logger
 
   def main do
     Logger.info "Starting"
+    start_time = Date.utc_today
 
-    ############################################
-    # Do time elapsed
+    # create url file and retrieve text
+    {:ok, text} = RankingPage.process
 
-    # request HTTPoison
+    text
+    |> String.split("\n")
+    |> Enum.each(fn(player_url) -> PlayerPage.process_player(player_url) end)
 
-    # pattern match response body
+    # go through file and make requests to each of the players
 
-    # parse response body to get the target urls
-
-    # Do something with that parsed body -> save it to files? in a list in memory?
-
-    # Discuss strategy with Rapha ->
-    # I will have a list with many urls. This is what I have in mind:
-    #  - One entity that distributes the elements in the list to other entities (a url, string) - A Supervisor?
-    #  - each process that gets that url then sends a request to it, gets contents, parses contents and returns a map with the results
-    # I want to do the above concurrently. I'd like to create 2,500 requests at the same time.
-    ############################################
-
-    Logger.info "Finished in ... seconds"
+    Logger.info "Finished in #{Date.diff(Date.utc_today, start_time)} seconds"
   end
 end

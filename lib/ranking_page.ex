@@ -3,7 +3,7 @@ defmodule RankingPage do
   @rankings_base_url "http://www.atpworldtour.com/en/rankings/singles?"
   @rankings_rest_url "&rankRange=1-5000&countryCode=all"
 
-  def call do
+  def process do
     build_url(Date.utc_today)
     |> fetch_data
     |> player_data
@@ -51,8 +51,8 @@ defmodule RankingPage do
   end
 
   def create_text_file_with_urls(urls, path) do
-    path
-    |> Path.absname
-    |> File.write(Enum.join(urls, "\n"), [:write])
+    full_path = Path.absname(path)
+    File.write(full_path, Enum.join(urls, "\n"), [:write])
+    File.read(full_path)
   end
 end

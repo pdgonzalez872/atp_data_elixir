@@ -12,7 +12,8 @@ defmodule RankingPageTest do
       |> Enum.map(fn(url) -> RankingPage.parse_individual_element(url) end)
       |> RankingPage.create_text_file_with_urls(Path.join(["test", "test_data","urls.txt"]))
 
-      assert result == :ok
+      {:ok, text} = result
+      assert Enum.at(String.split(text, "\n"), 0) == "/en/players/rafael-nadal/n409/overview"
     end
   end
 
@@ -68,7 +69,8 @@ defmodule RankingPageTest do
     test "creates a file with the list we pass in - eventually deprecate this and not save it to disk" do
       result = RankingPage.create_text_file_with_urls(["first_url", "second_url"],
                                                       Path.join(["test", "test_data","urls.txt"]))
-      assert result == :ok
+      {:ok, text} = result
+      assert text == "first_url\nsecond_url"
     end
   end
 end
