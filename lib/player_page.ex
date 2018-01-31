@@ -7,14 +7,14 @@ defmodule PlayerPage do
   @base_url "http://www.atpworldtour.com"
 
   def process_player(url) do
-    start_time = Date.utc_today
+    start_time = DateTime.utc_today
 
     result = "#{@base_url}#{url}"
     |> fetch_data
     |> parse_html
     |> result_to_string
 
-    Logger.info("Finished #{url} in #{Date.diff(Date.utc_today, start_time)} seconds")
+    Logger.info("Finished #{url} in #{DateTime.diff(DateTime.utc_today, start_time)} seconds")
 
     {:ok, url, result}
   end
