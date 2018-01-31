@@ -15,7 +15,6 @@ defmodule PlayerPage do
   end
 
   def fetch_data(url) do
-    HTTPoison.start
     %{body: body} = HTTPoison.get!(url)
     body
   end

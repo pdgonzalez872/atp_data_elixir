@@ -33,7 +33,6 @@ defmodule RankingPage do
   Fetches html from a url
   """
   def fetch_data(url) do
-    HTTPoison.start
     %{body: body} = HTTPoison.get!(url)
     body
   end

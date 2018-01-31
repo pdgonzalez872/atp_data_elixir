@@ -8,6 +8,9 @@ defmodule AtpDataElixir do
   require Logger
 
   def main do
+
+    HTTPoison.start
+
     Logger.info("Starting")
     start_time = Date.utc_today
 
@@ -26,11 +29,14 @@ defmodule AtpDataElixir do
     |> Flow.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
     |> Enum.to_list()
 
+    today = DateTime.utc_today
+    file_name = Enum.join([today.year,
+                           String.pad_leading(Integer.to_string(today.month), 2, "0"),
+                           String.pad_leading(Integer.to_string(today.day), 2, "0")], "")
 
-    # |> Stream.flat_map(&String.split(&1, "\n"))
-    # |> Stream.filter(fn(x) -> x != "" end)
-    # |> Stream.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
-    # |> Enum.to_list()
+    Path.join(["test", "test_data","data_files", "#{file_name}_rankings.txt"])
+    |> Path.absname
+    |> File.write(Enum.join(result, "\n"))
 
     Logger.info("Finished in #{Date.diff(Date.utc_today, start_time)} seconds")
   end
