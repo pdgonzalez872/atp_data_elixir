@@ -1,5 +1,7 @@
 # AtpDataElixir
 
+[![Build Status](https://travis-ci.org/pdgonzalez872/atp_data_elixir.svg?branch=master)](https://travis-ci.org/pdgonzalez872/atp_data_elixir)
+
 **TODO: Add description**
 
 ## Installation
