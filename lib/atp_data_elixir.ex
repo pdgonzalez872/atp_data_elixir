@@ -11,10 +11,10 @@ defmodule AtpDataElixir do
     HTTPoison.start
 
     Logger.info("Starting")
-    start_time = DateTime.utc_today
+    start_time = DateTime.utc_now
 
     Logger.info("Fetching ranking page and create URL file")
-    {:ok, text} = RankingPage.process
+    {:ok, _} = RankingPage.process
     Logger.info("Fetch Complete, File created")
 
     Logger.info("Fetching player data")
@@ -23,6 +23,7 @@ defmodule AtpDataElixir do
     |> Path.absname
     |> File.stream!
     |> Flow.from_enumerable()
+    |> Flow.partition()
     |> Flow.flat_map(&String.split(&1, "\n"))
     |> Flow.filter(fn(x) -> x != "" end)
     |> Flow.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
@@ -39,6 +40,6 @@ defmodule AtpDataElixir do
     |> Path.absname
     |> File.write(Enum.join(to_write, "\n"))
 
-    Logger.info("Finished in #{DateTime.diff(DateTime.utc_today, start_time)} seconds")
+    Logger.info("Finished in #{DateTime.diff(DateTime.utc_now, start_time)} seconds")
   end
 end
