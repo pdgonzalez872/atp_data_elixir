@@ -2,14 +2,20 @@ require IEx
 
 defmodule PlayerPage do
 
+  require Logger
+
   @base_url "http://www.atpworldtour.com"
 
   def process_player(url) do
+    start_time = Date.utc_today
+
     result = "#{@base_url}#{url}"
     |> IO.inspect
     |> fetch_data
     |> parse_html
     |> result_to_string
+
+    Logger.info("Finished in #{Date.diff(Date.utc_today, start_time)} seconds")
 
     {:ok, url, result}
   end
@@ -43,8 +49,12 @@ defmodule PlayerPage do
   end
 
   def parse_first_name(html) do
-    [{_, [{_, _}], [first_name]}] = Floki.find(html, ".player-profile-hero-name .first-name")
-    first_name
+    case Floki.find(html, ".player-profile-hero-name .first-name") do
+      [{_, [{_, _}], [first_name]}] ->
+      first_name
+      _ ->
+        "_"
+    end
   end
 
   def parse_last_name(html) do
@@ -57,8 +67,12 @@ defmodule PlayerPage do
   end
 
   def parse_country(html) do
-    [{_, [{_, _}], [country]}] = Floki.find(html, ".player-flag-code")
-    country
+    case Floki.find(html, ".player-flag-code") do
+      [{_, [{_, _}], [country]}] ->
+        country
+      _ ->
+        "_"
+    end
   end
 
   def parse_birthday(html) do
@@ -72,16 +86,19 @@ defmodule PlayerPage do
       _ ->
         "_"
     end
-
   end
 
   def parse_career_prize_money(html) do
-    {_, [{_, _}, {_, _}, {_, _}], [dirty_prize_money]} = Enum.at(Floki.find(html, ".players-stats-table .stat-value"), -1)
+    case Enum.at(Floki.find(html, ".players-stats-table .stat-value"), -1) do
 
-    dirty_prize_money
-    |> String.trim
-    |> String.replace(",", "")
-    |> String.replace("$", "")
+      {_, [{_, _}, {_, _}, {_, _}], [dirty_prize_money]} ->
+        dirty_prize_money
+        |> String.trim
+        |> String.replace(",", "")
+        |> String.replace("$", "")
+      _ ->
+        "_"
+    end
   end
 
   def result_to_string(%{} = r) do
