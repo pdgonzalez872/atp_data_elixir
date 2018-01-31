@@ -23,7 +23,7 @@ defmodule AtpDataElixir do
     |> Path.absname
     |> File.stream!
     |> Flow.from_enumerable()
-    |> Flow.partition(stages: 4)
+    |> Flow.partition(stages: 8)
     |> Flow.flat_map(&String.split(&1, "\n"))
     |> Flow.filter(fn(x) -> x != "" end)
     |> Flow.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
@@ -40,8 +40,8 @@ defmodule AtpDataElixir do
 
     file_path = Path.join(["test", "test_data","data_files", "#{file_name}_rankings.txt"])
     |> Path.absname
-    |> File.write("ranking|first_name|last_name|country|birthday|prize_money\n")
 
+    File.write(file_path, "ranking|first_name|last_name|country|birthday|prize_money\n")
     File.write(file_path, Enum.join(to_write, "\n"), [:append])
 
     Logger.info("Finished in #{DateTime.diff(DateTime.utc_now, start_time)} seconds")
