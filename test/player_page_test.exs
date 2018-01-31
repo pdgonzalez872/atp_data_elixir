@@ -33,5 +33,14 @@ defmodule PlayerPageTest do
       expected = %{birthday: "1981-08-08", country: "SUI", first_name: "Roger", last_name: "Federer", prize_money: "115050482", ranking: "2"}
       assert result == expected
     end
+
+    test "returns a map even when there is no data" do
+      html_string = Path.absname(Path.join(["test", "test_data","bayard_empty.htm"]))
+      |> File.read!
+
+      result = PlayerPage.parse_html(html_string)
+      expected = %{birthday: "_", country: "FRA", first_name: "Damien", last_name: "Bayard", prize_money: "2074", ranking: "1189"}
+      assert result == expected
+    end
   end
 end

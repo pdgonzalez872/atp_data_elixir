@@ -45,8 +45,12 @@ defmodule PlayerPage do
   end
 
   def parse_last_name(html) do
-    [{_, [{_, _}], [last_name]}] = Floki.find(html, ".player-profile-hero-name .last-name")
-    last_name
+    case Floki.find(html, ".player-profile-hero-name .last-name") do
+      [{_, [{_, _}], [last_name]}] ->
+        last_name
+      _ ->
+        "_"
+    end
   end
 
   def parse_country(html) do
@@ -55,13 +59,17 @@ defmodule PlayerPage do
   end
 
   def parse_birthday(html) do
-    [{_, [{_, _}], [birthday_dirty]}] = Floki.find(html, ".table-birthday")
+    case Floki.find(html, ".table-birthday") do
+      [{_, [{_, _}], [birthday_dirty]}] ->
+        birthday_dirty
+        |> String.replace("(", "")
+        |> String.replace(")", "")
+        |> String.replace(".", "-")
+        |> String.trim
+      _ ->
+        "_"
+    end
 
-    birthday_dirty
-    |> String.replace("(", "")
-    |> String.replace(")", "")
-    |> String.replace(".", "-")
-    |> String.trim
   end
 
   def parse_career_prize_money(html) do
