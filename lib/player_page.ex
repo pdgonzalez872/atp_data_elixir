@@ -1,20 +1,20 @@
 require IEx
 
 defmodule PlayerPage do
-
   require Logger
 
   @base_url "http://www.atpworldtour.com"
 
   def process_player(url) do
-    start_time = DateTime.utc_now
+    start_time = DateTime.utc_now()
 
-    result = "#{@base_url}#{url}"
-    |> fetch_data
-    |> parse_html
-    |> result_to_string
+    result =
+      "#{@base_url}#{url}"
+      |> fetch_data
+      |> parse_html
+      |> result_to_string
 
-    Logger.info("Finished #{url} in #{DateTime.diff(DateTime.utc_now, start_time)} seconds")
+    Logger.info("Finished #{url} in #{DateTime.diff(DateTime.utc_now(), start_time)} seconds")
 
     {:ok, url, result}
   end
@@ -41,7 +41,8 @@ defmodule PlayerPage do
     case Floki.find(html, ".player-ranking-position .data-number") do
       [{_, [{_, _}, {_, _}], [ranking_dirty]}] ->
         ranking_dirty
-        |> String.trim
+        |> String.trim()
+
       _ ->
         0
     end
@@ -50,7 +51,8 @@ defmodule PlayerPage do
   def parse_first_name(html) do
     case Floki.find(html, ".player-profile-hero-name .first-name") do
       [{_, [{_, _}], [first_name]}] ->
-      first_name
+        first_name
+
       _ ->
         "_"
     end
@@ -60,6 +62,7 @@ defmodule PlayerPage do
     case Floki.find(html, ".player-profile-hero-name .last-name") do
       [{_, [{_, _}], [last_name]}] ->
         last_name
+
       _ ->
         "_"
     end
@@ -69,6 +72,7 @@ defmodule PlayerPage do
     case Floki.find(html, ".player-flag-code") do
       [{_, [{_, _}], [country]}] ->
         country
+
       _ ->
         "_"
     end
@@ -81,7 +85,8 @@ defmodule PlayerPage do
         |> String.replace("(", "")
         |> String.replace(")", "")
         |> String.replace(".", "-")
-        |> String.trim
+        |> String.trim()
+
       _ ->
         "_"
     end
@@ -89,12 +94,12 @@ defmodule PlayerPage do
 
   def parse_career_prize_money(html) do
     case Enum.at(Floki.find(html, ".players-stats-table .stat-value"), -1) do
-
       {_, [{_, _}, {_, _}, {_, _}], [dirty_prize_money]} ->
         dirty_prize_money
-        |> String.trim
+        |> String.trim()
         |> String.replace(",", "")
         |> String.replace("$", "")
+
       _ ->
         "_"
     end

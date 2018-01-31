@@ -1,14 +1,13 @@
 defmodule RankingPage do
-
   @rankings_base_url "http://www.atpworldtour.com/en/rankings/singles?"
   @rankings_rest_url "&rankRange=1-5000&countryCode=all"
 
   def process do
-    build_url(Date.utc_today)
+    build_url(Date.utc_today())
     |> fetch_data
     |> player_data
-    |> Enum.map(fn(url) -> RankingPage.parse_individual_element(url) end)
-    |> create_text_file_with_urls(Path.join(["test", "test_data","urls.txt"]))
+    |> Enum.map(fn url -> RankingPage.parse_individual_element(url) end)
+    |> create_text_file_with_urls(Path.join(["test", "test_data", "urls.txt"]))
   end
 
   @doc """
