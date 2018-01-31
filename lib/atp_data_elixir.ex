@@ -11,7 +11,7 @@ defmodule AtpDataElixir do
     HTTPoison.start
 
     Logger.info("Starting")
-    start_time = Date.utc_today
+    start_time = DateTime.utc_today
 
     Logger.info("Fetching ranking page and create URL file")
     {:ok, text} = RankingPage.process
@@ -39,6 +39,6 @@ defmodule AtpDataElixir do
     |> Path.absname
     |> File.write(Enum.join(to_write, "\n"))
 
-    Logger.info("Finished in #{Date.diff(Date.utc_today, start_time)} seconds")
+    Logger.info("Finished in #{DateTime.diff(DateTime.utc_today, start_time)} seconds")
   end
 end
