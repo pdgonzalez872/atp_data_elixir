@@ -23,7 +23,7 @@ defmodule AtpDataElixir do
     |> Path.absname
     |> File.stream!
     |> Flow.from_enumerable()
-    |> Flow.partition(stages: 8)
+    |> Flow.partition(stages: 4)
     |> Flow.flat_map(&String.split(&1, "\n"))
     |> Flow.filter(fn(x) -> x != "" end)
     |> Flow.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
@@ -35,7 +35,7 @@ defmodule AtpDataElixir do
                            String.pad_leading(Integer.to_string(today.day), 2, "0")], "")
 
     to_write = Enum.map(result, fn(x) -> {_,_,data} = x; data end)
-    |> Enum.sort_by(to_write, fn(x) -> String.split(x, "|")|> Enum.at(-1) |> Integer.parse() end)
+    |> Enum.sort_by(fn(x) -> String.split(x, "|")|> Enum.at(-1) |> Integer.parse() end)
     |> Enum.reverse
 
     file_path = Path.join(["test", "test_data","data_files", "#{file_name}_rankings.txt"])
