@@ -29,7 +29,7 @@ defmodule AtpDataElixir do
     |> Flow.map(fn(player_url) -> PlayerPage.process_player(player_url) end)
     |> Enum.to_list()
 
-    today = DateTime.utc_today
+    today = Date.utc_today
     file_name = Enum.join([today.year,
                            String.pad_leading(Integer.to_string(today.month), 2, "0"),
                            String.pad_leading(Integer.to_string(today.day), 2, "0")], "")
