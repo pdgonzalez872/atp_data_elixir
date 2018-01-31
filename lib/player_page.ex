@@ -33,10 +33,13 @@ defmodule PlayerPage do
   end
 
   def parse_ranking(html) do
-    [{_, [{_, _}, {_, _}], [ranking_dirty]}] = Floki.find(html, ".player-ranking-position .data-number")
-
-    ranking_dirty
-    |> String.trim
+    case Floki.find(html, ".player-ranking-position .data-number") do
+      [{_, [{_, _}, {_, _}], [ranking_dirty]}] ->
+        ranking_dirty
+        |> String.trim
+      _ ->
+        0
+    end
   end
 
   def parse_first_name(html) do
