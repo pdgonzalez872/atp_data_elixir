@@ -8,7 +8,6 @@ defmodule AtpDataElixir do
   require Logger
 
   def main do
-
     HTTPoison.start
 
     Logger.info("Starting")
@@ -34,9 +33,11 @@ defmodule AtpDataElixir do
                            String.pad_leading(Integer.to_string(today.month), 2, "0"),
                            String.pad_leading(Integer.to_string(today.day), 2, "0")], "")
 
+    to_write = Enum.map(result, fn(x) -> {_,_,data} = x; data end)
+
     Path.join(["test", "test_data","data_files", "#{file_name}_rankings.txt"])
     |> Path.absname
-    |> File.write(Enum.join(result, "\n"))
+    |> File.write(Enum.join(to_write, "\n"))
 
     Logger.info("Finished in #{Date.diff(Date.utc_today, start_time)} seconds")
   end

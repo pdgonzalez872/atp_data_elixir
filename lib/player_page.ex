@@ -10,12 +10,11 @@ defmodule PlayerPage do
     start_time = Date.utc_today
 
     result = "#{@base_url}#{url}"
-    |> IO.inspect
     |> fetch_data
     |> parse_html
     |> result_to_string
 
-    Logger.info("Finished in #{Date.diff(Date.utc_today, start_time)} seconds")
+    Logger.info("Finished #{url} in #{Date.diff(Date.utc_today, start_time)} seconds")
 
     {:ok, url, result}
   end
