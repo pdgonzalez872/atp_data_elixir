@@ -1,8 +1,7 @@
 defmodule Mix.Tasks.FetchRankings do
   use Mix.Task
 
-
   def run(_) do
-    AtpDataElixir.main
+    AtpDataElixir.main()
   end
 end

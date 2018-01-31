@@ -9,9 +9,8 @@ defmodule PlayerPageTest do
   @tag :skip
   describe "integration test" do
     test "works in integration" do
-
       "/en/players/rafael-nadal/n409/overview"
-      |> PlayerPage.process_player
+      |> PlayerPage.process_player()
 
       # get a player url
       # combine it with the base url
@@ -26,20 +25,40 @@ defmodule PlayerPageTest do
 
   describe "parse_html/1" do
     test "returns a map with the correct data" do
-      html_string = Path.absname(Path.join(["test", "test_data","roger.htm"]))
-      |> File.read!
+      html_string =
+        Path.absname(Path.join(["test", "test_data", "roger.htm"]))
+        |> File.read!()
 
       result = PlayerPage.parse_html(html_string)
-      expected = %{birthday: "1981-08-08", country: "SUI", first_name: "Roger", last_name: "Federer", prize_money: "115050482", ranking: "2"}
+
+      expected = %{
+        birthday: "1981-08-08",
+        country: "SUI",
+        first_name: "Roger",
+        last_name: "Federer",
+        prize_money: "115050482",
+        ranking: "2"
+      }
+
       assert result == expected
     end
 
     test "returns a map even when there is no data" do
-      html_string = Path.absname(Path.join(["test", "test_data","bayard_empty.htm"]))
-      |> File.read!
+      html_string =
+        Path.absname(Path.join(["test", "test_data", "bayard_empty.htm"]))
+        |> File.read!()
 
       result = PlayerPage.parse_html(html_string)
-      expected = %{birthday: "_", country: "FRA", first_name: "Damien", last_name: "Bayard", prize_money: "2074", ranking: "1189"}
+
+      expected = %{
+        birthday: "_",
+        country: "FRA",
+        first_name: "Damien",
+        last_name: "Bayard",
+        prize_money: "2074",
+        ranking: "1189"
+      }
+
       assert result == expected
     end
   end
