@@ -125,7 +125,7 @@ defmodule AtpDataElixir do
       |> Enum.reverse()
 
     file_path =
-      Path.join(["test", "test_data", "data_files", "#{file_name}_single_fetch_rankings.txt"])
+      Path.join(["test", "lib", "test_data", "data_files", "#{file_name}_single_fetch_rankings.txt"])
       |> Path.absname()
 
     File.write(file_path, "ranking|first_name|last_name|country|birthday|prize_money\n")
