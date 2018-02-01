@@ -7,7 +7,7 @@ defmodule RankingPage do
     |> fetch_data
     |> player_data
     |> Enum.map(fn url -> RankingPage.parse_individual_element(url) end)
-    |> create_text_file_with_urls(Path.join(["test", "test_data", "urls.txt"]))
+    |> create_text_file_with_urls(Path.join(["test", "lib", "test_data", "urls.txt"]))
   end
 
   @doc """

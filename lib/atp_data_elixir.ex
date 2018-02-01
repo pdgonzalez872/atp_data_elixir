@@ -46,7 +46,7 @@ defmodule AtpDataElixir do
     Logger.info("Fetching player data")
 
     result =
-      Path.join(["test", "test_data", "urls.txt"])
+      Path.join(["test", "lib", "test_data", "urls.txt"])
       |> Path.absname()
       |> File.stream!()
       |> Flow.from_enumerable()
@@ -94,7 +94,7 @@ defmodule AtpDataElixir do
     Logger.info("Fetching player data")
 
     result =
-      Path.join(["test", "test_data", "single_url.txt"])
+      Path.join(["test", "lib", "test_data", "single_url.txt"])
       |> Path.absname()
       |> File.stream!()
       |> Flow.from_enumerable()
