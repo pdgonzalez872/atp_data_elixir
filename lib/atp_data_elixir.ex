@@ -1,33 +1,11 @@
 defmodule AtpDataElixir do
-  use Application
+  @moduledoc """
+  AtpDataElixir keeps the contexts that define your domain
+  and business logic.
 
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  def start(_type, _args) do
-    import Supervisor.Spec
-
-    # Define workers and child supervisors to be supervised
-    children = [
-      # Start the Ecto repository
-      supervisor(AtpDataElixir.Repo, []),
-      # Start the endpoint when the application starts
-      supervisor(AtpDataElixir.Endpoint, []),
-      # Start your own worker by calling: AtpDataElixir.Worker.start_link(arg1, arg2, arg3)
-      # worker(AtpDataElixir.Worker, [arg1, arg2, arg3]),
-    ]
-
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: AtpDataElixir.Supervisor]
-    Supervisor.start_link(children, opts)
-  end
-
-  # Tell Phoenix to update the endpoint configuration
-  # whenever the application is updated.
-  def config_change(changed, _new, removed) do
-    AtpDataElixir.Endpoint.config_change(changed, removed)
-    :ok
-  end
+  Contexts are also responsible for managing your data, regardless
+  if it comes from the database, an external API or others.
+  """
 
   # TODO:
   # Legacy -> move this out of here.
@@ -46,7 +24,7 @@ defmodule AtpDataElixir do
     Logger.info("Fetching player data")
 
     result =
-      Path.join(["test", "test_data", "urls.txt"])
+      Path.join(["test", "lib", "test_data", "urls.txt"])
       |> Path.absname()
       |> File.stream!()
       |> Flow.from_enumerable()
@@ -94,7 +72,7 @@ defmodule AtpDataElixir do
     Logger.info("Fetching player data")
 
     result =
-      Path.join(["test", "test_data", "single_url.txt"])
+      Path.join(["test", "lib", "test_data", "single_url.txt"])
       |> Path.absname()
       |> File.stream!()
       |> Flow.from_enumerable()
@@ -125,7 +103,7 @@ defmodule AtpDataElixir do
       |> Enum.reverse()
 
     file_path =
-      Path.join(["test", "test_data", "data_files", "#{file_name}_single_fetch_rankings.txt"])
+      Path.join(["test", "lib", "test_data", "data_files", "#{file_name}_single_fetch_rankings.txt"])
       |> Path.absname()
 
     File.write(file_path, "ranking|first_name|last_name|country|birthday|prize_money\n")

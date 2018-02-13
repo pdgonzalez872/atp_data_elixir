@@ -10,10 +10,10 @@ config :atp_data_elixir,
   ecto_repos: [AtpDataElixir.Repo]
 
 # Configures the endpoint
-config :atp_data_elixir, AtpDataElixir.Endpoint,
+config :atp_data_elixir, AtpDataElixirWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "t+e72xYXK5pnd0nRvjn5eEy0b6n/YFxty0E+dYwCrnmJ7YRyf2t5BBZF7q6BUB5R",
-  render_errors: [view: AtpDataElixir.ErrorView, accepts: ~w(html json)],
+  secret_key_base: "iiO29+cf4VxlR0WZLwaGiJ8z2ARDPVwRFIH6rxwHuayxR+gDKNs62cjQaROr2bE5",
+  render_errors: [view: AtpDataElixirWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: AtpDataElixir.PubSub,
            adapter: Phoenix.PubSub.PG2]
 

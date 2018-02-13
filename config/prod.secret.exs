@@ -8,8 +8,8 @@ use Mix.Config
 # file or create a script for recreating it, since it's
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
-config :atp_data_elixir, AtpDataElixir.Endpoint,
-  secret_key_base: "3lC8pZNCfuEn85bEJ+tqOhPTNL4RiMGS/1/xTmlGdQEotDlNHyYUOEdUDg6kize/"
+config :atp_data_elixir, AtpDataElixirWeb.Endpoint,
+  secret_key_base: "GyxTdjRQDMzbChyYlNTgOAiaX/Vg/1vuBzqICMXHCoBa4C9PGS/2sni9HapiyBcH"
 
 # Configure your database
 config :atp_data_elixir, AtpDataElixir.Repo,
