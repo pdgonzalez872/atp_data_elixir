@@ -12,7 +12,7 @@ defmodule AcceptanceTest do
 
       alias AtpDataElixir.{Repo, Player, Earning}
 
-      %Player{first_name: "Test"} |> Repo.insert(player)
+      %Player{first_name: "Test"} |> Repo.insert
 
       earning = %Earning{amount: 10000}
       |> Repo.insert
