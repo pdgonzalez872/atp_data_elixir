@@ -1,7 +1,7 @@
 defmodule AtpDataElixir.Player do
   use Ecto.Schema
 
-  schema "player" do
+  schema "players" do
     field :ranking, :string
     field :first_name, :string
     field :last_name, :string

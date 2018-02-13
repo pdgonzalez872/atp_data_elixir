@@ -2,7 +2,7 @@ defmodule AtpDataElixir.Repo.Migrations.AddPlayerTable do
   use Ecto.Migration
 
   def up do
-    create table("player") do
+    create table("players") do
       add :ranking, :string
       add :first_name, :string
       add :last_name, :string
@@ -14,6 +14,6 @@ defmodule AtpDataElixir.Repo.Migrations.AddPlayerTable do
   end
 
   def down do
-    drop table("player")
+    drop table("players")
   end
 end
