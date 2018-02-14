@@ -11,6 +11,8 @@ defmodule AtpDataElixir do
   # Legacy -> move this out of here.
   require Logger
 
+  alias AtpDataElixir.{Repo, Player, Earning}
+
   def main do
     HTTPoison.start()
 
@@ -114,8 +116,6 @@ defmodule AtpDataElixir do
   end
 
   def fetch_rankings do
-    alias AtpDataElixir.{Repo, Player, Earning}
-
     Logger.info("Starting")
 
     HTTPoison.start()
@@ -135,34 +135,31 @@ defmodule AtpDataElixir do
       |> Flow.from_enumerable()
       |> Flow.partition(stages: 8)
       |> Flow.map(fn player_url -> PlayerPage.process_player(player_url) end)
-      |> Enum.to_list()
-
-    today = Date.utc_today()
-
-    Enum.each(results, fn(result) ->
-      {_status, _url, {_string_representation, player_map}} = result
-
-      player = case Repo.get_by(Player, first_name: player_map.first_name, last_name: player_map.last_name) do
-        nil ->
-          Logger.info "Didn't find player, will create #{player_map.first_name} #{player_map.last_name}"
-          Repo.insert!(%Player{
-            first_name: player_map.first_name,
-            last_name: player_map.last_name,
-            country: player_map.country,
-            birthday: player_map.birthday
-          })
-        _ ->
-          Logger.info "Found #{player_map.first_name} #{player_map.last_name}, will use it"
-          Repo.get_by(Player, first_name: player_map.first_name, last_name: player_map.last_name)
-      end
-
-      {amount, _} = Integer.parse(player_map.prize_money)
-
-      %Earning{amount: amount, player_id: player.id}
-      |> Repo.insert!
-
-    end)
+      |> Enum.each(fn(result) -> persist_values(result) end)
 
     Logger.info("Finished in #{DateTime.diff(DateTime.utc_now(), start_time)} seconds")
+  end
+
+  def persist_values(result) do
+    {_status, _url, {_string_representation, player_map}} = result
+
+    player = case Repo.get_by(Player, first_name: player_map.first_name, last_name: player_map.last_name) do
+      nil ->
+        Logger.info "Didn't find player, will create #{player_map.first_name} #{player_map.last_name}"
+        Repo.insert!(%Player{
+          first_name: player_map.first_name,
+          last_name: player_map.last_name,
+          country: player_map.country,
+          birthday: player_map.birthday
+        })
+      _ ->
+        Logger.info "Found #{player_map.first_name} #{player_map.last_name}, will use it"
+        Repo.get_by(Player, first_name: player_map.first_name, last_name: player_map.last_name)
+    end
+
+    {amount, _} = Integer.parse(player_map.prize_money)
+
+    %Earning{amount: amount, player_id: player.id}
+    |> Repo.insert!
   end
 end
