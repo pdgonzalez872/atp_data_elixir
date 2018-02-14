@@ -14,18 +14,19 @@ defmodule AtpDataElixir.EarningsAggregator do
         get_latest_earnings_for_player(player)
       end)
       |> Enum.sort_by(fn result ->
-        {_, _, amount} = result
+        %{name: name, amount: amount} = result
         amount
       end)
       |> Enum.reverse()
 
     results
+    #Jason.encode!(results)
   end
 
   def get_latest_earnings_for_player(player) do
     player_data = preload(Player, :earnings) |> Repo.get(player.id)
     latest_earnings = Enum.at(player_data.earnings, -1)
 
-    {:ok, "#{player.first_name} #{player.last_name}", latest_earnings.amount}
+    %{name: "#{player.first_name} #{player.last_name}", amount: latest_earnings.amount}
   end
 end
