@@ -25,13 +25,13 @@ defmodule AtpDataElixirWeb.ChannelCase do
     end
   end
 
-
   setup tags do
     :ok = Ecto.Adapters.SQL.Sandbox.checkout(AtpDataElixir.Repo)
+
     unless tags[:async] do
       Ecto.Adapters.SQL.Sandbox.mode(AtpDataElixir.Repo, {:shared, self()})
     end
+
     :ok
   end
-
 end

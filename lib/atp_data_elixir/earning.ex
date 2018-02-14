@@ -3,8 +3,8 @@ defmodule AtpDataElixir.Earning do
   import Ecto.Changeset
 
   schema "earnings" do
-    field :amount, :integer
-    belongs_to :player, AtpDataElixir.Player
+    field(:amount, :integer)
+    belongs_to(:player, AtpDataElixir.Player)
     timestamps()
   end
 end
