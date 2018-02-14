@@ -11,7 +11,7 @@ defmodule AtpDataElixir.Application do
       # Start the Ecto repository
       supervisor(AtpDataElixir.Repo, []),
       # Start the endpoint when the application starts
-      supervisor(AtpDataElixirWeb.Endpoint, []),
+      supervisor(AtpDataElixirWeb.Endpoint, [])
       # Start your own worker by calling: AtpDataElixir.Worker.start_link(arg1, arg2, arg3)
       # worker(AtpDataElixir.Worker, [arg1, arg2, arg3]),
     ]

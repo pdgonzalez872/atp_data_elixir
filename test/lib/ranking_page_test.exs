@@ -11,7 +11,9 @@ defmodule RankingPageTest do
         |> File.read!()
         |> RankingPage.player_data()
         |> Enum.map(fn url -> RankingPage.parse_individual_element(url) end)
-        |> RankingPage.create_text_file_with_urls(Path.join(["test", "lib", "test_data", "urls.txt"]))
+        |> RankingPage.create_text_file_with_urls(
+          Path.join(["test", "lib", "test_data", "urls.txt"])
+        )
 
       {:ok, text} = result
       assert Enum.at(String.split(text, "\n"), 0) == "/en/players/rafael-nadal/n409/overview"

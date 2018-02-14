@@ -11,10 +11,11 @@ defmodule RankingPage do
   end
 
   def process_and_keep_in_memory do
-    result = build_url(Date.utc_today())
-    |> fetch_data
-    |> player_data
-    |> Enum.map(fn url -> RankingPage.parse_individual_element(url) end)
+    result =
+      build_url(Date.utc_today())
+      |> fetch_data
+      |> player_data
+      |> Enum.map(fn url -> RankingPage.parse_individual_element(url) end)
 
     {:ok, result}
   end

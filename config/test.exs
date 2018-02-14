@@ -17,4 +17,5 @@ config :atp_data_elixir, AtpDataElixir.Repo,
   database: "atp_data_elixir_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
-  ownership_timeout: 10 * 6 * 1000 # more time to play around in IEx
+  # more time to play around in IEx
+  ownership_timeout: 10 * 6 * 1000

@@ -28,8 +28,9 @@ defmodule AtpDataElixirWeb do
 
   def view do
     quote do
-      use Phoenix.View, root: "lib/atp_data_elixir_web/templates",
-                        namespace: AtpDataElixirWeb
+      use Phoenix.View,
+        root: "lib/atp_data_elixir_web/templates",
+        namespace: AtpDataElixirWeb
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 2, view_module: 1]
