@@ -10,6 +10,15 @@ defmodule RankingPage do
     |> create_text_file_with_urls(Path.join(["test", "lib", "test_data", "urls.txt"]))
   end
 
+  def process_and_keep_in_memory do
+    result = build_url(Date.utc_today())
+    |> fetch_data
+    |> player_data
+    |> Enum.map(fn url -> RankingPage.parse_individual_element(url) end)
+
+    {:ok, result}
+  end
+
   @doc """
   Returns a valid rankings url from the ATP website
   """

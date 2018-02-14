@@ -106,6 +106,6 @@ defmodule PlayerPage do
   end
 
   def result_to_string(%{} = r) do
-    "#{r.ranking}|#{r.first_name}|#{r.last_name}|#{r.country}|#{r.birthday}|#{r.prize_money}"
+    {"#{r.ranking}|#{r.first_name}|#{r.last_name}|#{r.country}|#{r.birthday}|#{r.prize_money}", r}
   end
 end
