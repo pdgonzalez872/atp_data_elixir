@@ -19,8 +19,7 @@ defmodule AtpDataElixir.EarningsAggregator do
       end)
       |> Enum.reverse()
 
-    results
-    #Jason.encode!(results)
+    results |> Jason.encode!
   end
 
   def get_latest_earnings_for_player(player) do
