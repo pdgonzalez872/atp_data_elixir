@@ -5,6 +5,8 @@ defmodule AtpDataElixir.Repo.Migrations.AddLastEarningsTable do
     create table(:last_earnings) do
       add :results, :map
       add :date, :utc_datetime
+
+      timestamps()
     end
   end
 end

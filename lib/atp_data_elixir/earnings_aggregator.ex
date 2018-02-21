@@ -1,5 +1,5 @@
 defmodule AtpDataElixir.EarningsAggregator do
-  alias AtpDataElixir.{Repo, Player, Earning}
+  alias AtpDataElixir.{Repo, Player, Earning, LastEarning}
 
   import Ecto.Query
 
@@ -30,15 +30,18 @@ defmodule AtpDataElixir.EarningsAggregator do
   end
 
   def get_and_persist_latest_earnings_for_players do
-    # get results and persist a new record in last earnings table
-    get_latest_earnings_for_players
+    encoded_json_object = get_latest_earnings_for_players()
     |> Jason.encode!
 
-
+    Repo.insert!(%LastEarning{results: encoded_json_object, date: DateTime.utc_now()})
   end
 
   def get_latest_earnings do
-    # query new table, decode json and return objects
+    result = LastEarning
+    |> Ecto.Query.last
+    |> Repo.one
 
+    %AtpDataElixir.LastEarning{results: json_result} = result
+    Jason.decode! json_result
   end
 end

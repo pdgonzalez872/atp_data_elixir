@@ -6,14 +6,14 @@ defmodule AtpDataElixirWeb.PageController do
   end
 
   def chart_data(conn, _params) do
-    player_data = AtpDataElixir.EarningsAggregator.get_latest_earnings_for_players
+    player_data = AtpDataElixir.EarningsAggregator.get_latest_earnings
 
     # TODO: improve - iterating twice
     chart_labels = player_data
-                   |> Enum.map(fn(el) -> %{ amount: _, name: name } = el; name end)
+                   |> Enum.map(fn(el) -> %{ "amount" => _, "name" => name } = el; name end)
 
     chart_data = player_data
-                 |> Enum.map(fn(el) -> %{ amount: amount, name: _ } = el; amount end)
+                 |> Enum.map(fn(el) -> %{ "amount" => amount, "name" => _ } = el; amount end)
 
     json(conn, [chart_labels, chart_data])
   end

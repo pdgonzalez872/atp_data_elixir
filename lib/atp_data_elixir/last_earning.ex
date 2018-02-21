@@ -3,7 +3,7 @@ defmodule AtpDataElixir.LastEarning do
   import Ecto.Changeset
 
   schema "last_earnings" do
-    field(:result, :map)
+    field(:results, :string)
     field(:date, :utc_datetime)
     timestamps()
   end
