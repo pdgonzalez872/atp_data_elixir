@@ -31107,7 +31107,7 @@ var ChartThisNow = exports.ChartThisNow = {
         data: {
           labels: chartLabels,
           datasets: [{
-            label: "My First dataset",
+            label: "Career Prize Money - Singles and Doubles combined",
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: chartData
