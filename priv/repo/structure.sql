@@ -68,6 +68,36 @@ ALTER SEQUENCE earnings_id_seq OWNED BY earnings.id;
 
 
 --
+-- Name: last_earnings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE last_earnings (
+    id bigint NOT NULL,
+    results json,
+    date timestamp without time zone
+);
+
+
+--
+-- Name: last_earnings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE last_earnings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: last_earnings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE last_earnings_id_seq OWNED BY last_earnings.id;
+
+
+--
 -- Name: players; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -120,6 +150,13 @@ ALTER TABLE ONLY earnings ALTER COLUMN id SET DEFAULT nextval('earnings_id_seq':
 
 
 --
+-- Name: last_earnings id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY last_earnings ALTER COLUMN id SET DEFAULT nextval('last_earnings_id_seq'::regclass);
+
+
+--
 -- Name: players id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -132,6 +169,14 @@ ALTER TABLE ONLY players ALTER COLUMN id SET DEFAULT nextval('players_id_seq'::r
 
 ALTER TABLE ONLY earnings
     ADD CONSTRAINT earnings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: last_earnings last_earnings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY last_earnings
+    ADD CONSTRAINT last_earnings_pkey PRIMARY KEY (id);
 
 
 --
@@ -162,5 +207,5 @@ ALTER TABLE ONLY earnings
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO "schema_migrations" (version) VALUES (20180213150220), (20180213160328), (20180213162829), (20180214143248);
+INSERT INTO "schema_migrations" (version) VALUES (20180213150220), (20180213160328), (20180213162829), (20180214143248), (20180221221009);
 
