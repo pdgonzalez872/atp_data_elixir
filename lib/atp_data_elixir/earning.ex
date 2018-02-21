@@ -5,6 +5,7 @@ defmodule AtpDataElixir.Earning do
   schema "earnings" do
     field(:amount, :integer)
     belongs_to(:player, AtpDataElixir.Player)
+    field(:date, :utc_datetime)
     timestamps()
   end
 end
