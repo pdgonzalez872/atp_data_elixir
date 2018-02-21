@@ -62,7 +62,7 @@ defmodule AtpDataElixir do
 
     {amount, _} = Integer.parse(player_map.prize_money)
 
-    %Earning{amount: amount, player_id: player.id}
+    %Earning{amount: amount, player_id: player.id, date: DateTime.utc_now}
     |> Repo.insert!()
   end
 end

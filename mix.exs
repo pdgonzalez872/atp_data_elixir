@@ -44,7 +44,8 @@ defmodule AtpDataElixir.Mixfile do
       {:httpoison, "~> 1.0"},
       {:floki, "~> 0.19.0"},
       {:timex, "~> 3.0"},
-      {:flow, "~> 0.13"}
+      {:flow, "~> 0.13"},
+      {:jason, "~> 1.0"}
     ]
   end
 
