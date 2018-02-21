@@ -9,4 +9,11 @@ defmodule AtpDataElixirWeb.PageController do
 
     render(conn, "index.html", player_data: player_data, chart_labels: chart_labels, chart_data: chart_data)
   end
+
+  def chart_data(conn, _params) do
+    chart_labels = AtpDataElixir.EarningsAggregator.chart_labels
+    chart_data = AtpDataElixir.EarningsAggregator.chart_data
+
+    json(conn, [chart_labels, chart_data])
+  end
 end

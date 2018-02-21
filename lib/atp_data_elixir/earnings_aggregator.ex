@@ -30,10 +30,10 @@ defmodule AtpDataElixir.EarningsAggregator do
   end
 
   def chart_labels do
-    Jason.encode! ["Paulo", "Rapha"]
+    ["Paulo", "Rapha"]
   end
 
   def chart_data do
-    Jason.encode! ["1" , "2"]
+    ["1" , "2"]
   end
 end

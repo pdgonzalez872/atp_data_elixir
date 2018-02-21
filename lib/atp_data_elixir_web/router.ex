@@ -18,6 +18,7 @@ defmodule AtpDataElixirWeb.Router do
     pipe_through(:browser)
 
     get("/", PageController, :index)
+    get("/chart_data", PageController, :chart_data)
   end
 
   # Other scopes may use custom stacks.
