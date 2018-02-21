@@ -7,12 +7,7 @@
   <div class="col-lg-6">
     <h4>Player Earnings</h4>
     <ul>
-      <%= for player <- @player_data do %>
-        <li>
-          <% %{name: player_name, amount: player_earnings } = player %>
-          <%= player_name %> <%= player_earnings %>
-        </li>
-      <% end %>
+      <li> <%= @player_data %> </li>
     </ul>
   </div>
 </div>

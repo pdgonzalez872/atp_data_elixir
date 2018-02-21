@@ -1641,6 +1641,15 @@ require.register("js/app.js", function(exports, require, module) {
 
 require("phoenix_html");
 
+require("./charting");
+
+});
+
+require.register("js/charting.js", function(exports, require, module) {
+"use strict";
+
+console.log("wooo");
+
 });
 
 require.register("js/socket.js", function(exports, require, module) {
