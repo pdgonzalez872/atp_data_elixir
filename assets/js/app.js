@@ -20,6 +20,7 @@ import "phoenix_html"
 
 //import socket from "./socket"
 
+import "jquery"
 import Chart from "chart.js"
 
 import { ChartThisNow } from "./charting"

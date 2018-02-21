@@ -28,4 +28,12 @@ defmodule AtpDataElixir.EarningsAggregator do
 
     %{name: "#{player.first_name} #{player.last_name}", amount: latest_earnings.amount}
   end
+
+  def chart_labels do
+    Jason.encode! ["Paulo", "Rapha"]
+  end
+
+  def chart_data do
+    Jason.encode! ["1" , "2"]
+  end
 end
