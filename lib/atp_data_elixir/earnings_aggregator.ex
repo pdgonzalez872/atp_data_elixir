@@ -19,7 +19,7 @@ defmodule AtpDataElixir.EarningsAggregator do
       end)
       |> Enum.reverse()
 
-    results |> Jason.encode!
+    results
   end
 
   def get_latest_earnings_for_player(player) do
@@ -27,13 +27,5 @@ defmodule AtpDataElixir.EarningsAggregator do
     latest_earnings = Enum.at(player_data.earnings, -1)
 
     %{name: "#{player.first_name} #{player.last_name}", amount: latest_earnings.amount}
-  end
-
-  def chart_labels do
-    ["Paulo", "Rapha"]
-  end
-
-  def chart_data do
-    ["1" , "2"]
   end
 end

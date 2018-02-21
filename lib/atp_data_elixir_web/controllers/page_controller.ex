@@ -2,17 +2,18 @@ defmodule AtpDataElixirWeb.PageController do
   use AtpDataElixirWeb, :controller
 
   def index(conn, _params) do
-    #player_data = AtpDataElixir.EarningsAggregator.get_latest_earnings_for_players
-    player_data = []
-    chart_labels = AtpDataElixir.EarningsAggregator.chart_labels
-    chart_data = AtpDataElixir.EarningsAggregator.chart_data
-
-    render(conn, "index.html", player_data: player_data, chart_labels: chart_labels, chart_data: chart_data)
+    render(conn, "index.html")
   end
 
   def chart_data(conn, _params) do
-    chart_labels = AtpDataElixir.EarningsAggregator.chart_labels
-    chart_data = AtpDataElixir.EarningsAggregator.chart_data
+    player_data = AtpDataElixir.EarningsAggregator.get_latest_earnings_for_players
+
+    # TODO: improve - iterating twice
+    chart_labels = player_data
+                   |> Enum.map(fn(el) -> %{ amount: _, name: name } = el; name end)
+
+    chart_data = player_data
+                 |> Enum.map(fn(el) -> %{ amount: amount, name: _ } = el; amount end)
 
     json(conn, [chart_labels, chart_data])
   end
