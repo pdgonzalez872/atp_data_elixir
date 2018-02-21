@@ -1,5 +1,5 @@
 defmodule AtpDataElixir.EarningsAggregator do
-  alias AtpDataElixir.{Repo, Player, Earning, LastEarning}
+  alias AtpDataElixir.{Repo, Player, LastEarning}
 
   import Ecto.Query
 
@@ -14,7 +14,7 @@ defmodule AtpDataElixir.EarningsAggregator do
         get_latest_earnings_for_player(player)
       end)
       |> Enum.sort_by(fn result ->
-        %{name: name, amount: amount} = result
+        %{name: _, amount: amount} = result
         amount
       end)
       |> Enum.reverse()
