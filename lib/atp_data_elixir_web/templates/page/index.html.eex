@@ -6,6 +6,14 @@
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Player Earnings</h4>
+
+    <canvas id="myChart"></canvas>
+
+    <script src= "<%= static_path(@conn, "/js/app.js")%>"></script>
+
+    <script>require("js/app").App.run()</script>
+    <script>require("js/app").Charting.run()</script>
+
     <ul>
       <li> <%= @player_data %> </li>
     </ul>

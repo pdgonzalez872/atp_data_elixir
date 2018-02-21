@@ -1639,16 +1639,86 @@ require.register("phoenix_html/priv/static/phoenix_html.js", function(exports, r
 require.register("js/app.js", function(exports, require, module) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Charting = exports.App = undefined;
+
 require("phoenix_html");
 
-require("./charting");
+var _charting = require("./charting");
+
+// Import local files
+//
+// Local files can be imported directly using relative
+// paths "./socket" or full ones "web/static/js/socket".
+
+//import socket from "./socket"
+
+var App = exports.App = {
+  run: function run() {
+    console.log("Hello!! Wooo");
+  }
+}; // Brunch automatically concatenates all files in your
+// watched paths. Those paths can be configured at
+// config.paths.watched in "brunch-config.js".
+//
+// However, those files will only be executed if
+// explicitly imported. The only exception are files
+// in vendor, which are never wrapped in imports and
+// therefore are always executed.
+
+// Import dependencies
+//
+// If you no longer want to use a dependency, remember
+// to also remove its path from "config.paths.watched".
+var Charting = exports.Charting = {
+  run: function run() {
+    _charting.ChartThisNow.chart_this_now();
+  }
+};
 
 });
 
 require.register("js/charting.js", function(exports, require, module) {
 "use strict";
 
-console.log("wooo");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// Following step by step here:
+// https://medium.com/@kiminoa/phoenix-and-brunch-adding-a-new-javascript-file-for-inline-template-invocation-349bcb68f4e4
+
+//export const NewFunction = {
+//  new_function: (arg1) => {
+//    console.log(`New console from JS function: ${arg1}!`);
+//  }
+//}
+//
+var ChartThisNow = exports.ChartThisNow = {
+  chart_this_now: function chart_this_now() {
+    console.log("inside chart");
+    //var ctx = document.getElementById('myChart').getContext('2d');
+    //var chart = new Chart(ctx, {
+    //    // The type of chart we want to create
+    //    type: 'line',
+
+    //    // The data for our dataset
+    //    data: {
+    //        labels: ["January", "February", "March", "April", "May", "June", "July"],
+    //        datasets: [{
+    //            label: "My First dataset",
+    //            backgroundColor: 'rgb(255, 99, 132)',
+    //            borderColor: 'rgb(255, 99, 132)',
+    //            data: [0, 10, 5, 2, 20, 30, 45],
+    //        }]
+    //    },
+
+    //    // Configuration options go here
+    //    options: {}
+    //});
+  }
+};
 
 });
 

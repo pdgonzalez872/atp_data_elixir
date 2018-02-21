@@ -19,4 +19,17 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 //import socket from "./socket"
-import "./charting"
+
+export var App = {
+  run: function(){
+    console.log("Hello!! Wooo")
+  }
+}
+
+import { ChartThisNow } from "./charting"
+
+export var Charting = {
+  run: function(){
+    ChartThisNow.chart_this_now()
+  }
+}
