@@ -3,7 +3,7 @@ defmodule AtpDataElixir.Repo.Migrations.AddLastEarningsTable do
 
   def change do
     create table(:last_earnings) do
-      add :results, :json
+      add :results, :map
       add :date, :utc_datetime
     end
   end

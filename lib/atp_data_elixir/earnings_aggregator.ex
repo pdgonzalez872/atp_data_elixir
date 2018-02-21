@@ -28,4 +28,17 @@ defmodule AtpDataElixir.EarningsAggregator do
 
     %{name: "#{player.first_name} #{player.last_name}", amount: latest_earnings.amount}
   end
+
+  def get_and_persist_latest_earnings_for_players do
+    # get results and persist a new record in last earnings table
+    get_latest_earnings_for_players
+    |> Jason.encode!
+
+
+  end
+
+  def get_latest_earnings do
+    # query new table, decode json and return objects
+
+  end
 end
