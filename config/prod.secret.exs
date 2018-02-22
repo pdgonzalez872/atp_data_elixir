@@ -17,4 +17,5 @@ config :atp_data_elixir, AtpDataElixir.Repo,
   username: "postgres",
   password: "paulo",
   database: "atp_data_elixir_prod",
+  socket: "/https://www.googleapis.com/sql/v1beta4/projects/atpelixir/instances/atpelixir/databases/postgres/ATPElixir:us-central1:db-instance-name/.s.PGSQL.5432”,
   pool_size: 15
