@@ -15,6 +15,6 @@ config :atp_data_elixir, AtpDataElixirWeb.Endpoint,
 config :atp_data_elixir, AtpDataElixir.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "paulo",
   database: "atp_data_elixir_prod",
   pool_size: 15
