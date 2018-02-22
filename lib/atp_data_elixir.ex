@@ -28,8 +28,7 @@ defmodule AtpDataElixir do
 
     Logger.info("Fetching player data")
 
-    results =
-      list_of_players
+    list_of_players
       |> Flow.from_enumerable()
       |> Flow.partition(stages: 8)
       |> Flow.map(fn player_url -> PlayerPage.process_player(player_url) end)
