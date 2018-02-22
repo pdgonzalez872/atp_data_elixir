@@ -30,13 +30,13 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"6,HFo[(T?8En:f?XeuE8Z7x?UfOa=e7&U:zl<qY)8.sEK_9j*YwGzyh].!G^,<Qf"
+  set cookie: :"5]2f(N>xx|cXGy_xOJX`(.pdF14%OSPp1M`3],&/j|yKmcItS.n4}2a6JYYLbM0B"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"!Ah%@}t_kUvqK;F<N_0k(HzoNEkIAl*HY/u>S]E~=lgeWZN$U2@}`4,RL6m=X3pW"
+  set cookie: :"o~{BPmxULaL0lu{VFdm&jA@)loIdVUuzXCd_/PQedWfo*s=tSG[~KavJmf&7aJ>S"
 end
 
 # You may define one or more releases in this file.
@@ -51,3 +51,10 @@ release :atp_data_elixir do
   ]
 end
 
+config :atp_data_elixir, AtpDataElixirWeb.Endpoint,
+  load_from_system_env: true,
+  http: [port: "${PORT}"],
+  check_origin: false,
+  server: true,
+  root: ".",
+  cache_static_manifest: "priv/static/cache_manifest.json"
