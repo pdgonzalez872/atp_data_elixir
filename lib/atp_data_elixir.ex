@@ -16,6 +16,9 @@ defmodule AtpDataElixir do
   end
 
   def fetch_rankings do
+    # Need to make all applications run here.
+    Application.ensure_all_started(:atp_data_elixir)
+
     Logger.info("Starting")
 
     HTTPoison.start()
