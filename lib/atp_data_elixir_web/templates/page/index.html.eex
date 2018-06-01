@@ -1,11 +1,18 @@
 <div class="jumbotron">
 </div>
-
-<h2>ATP Data</h2>
-
 <div class="row marketing">
   <div class="col-lg-6">
-    <h4>Currently Ranked Player Earnings</h4>
+
+    <h5>What is this?</h5>
+    <p>
+      This project shows the discrepancy between earnings in the ATP tennis
+      circuit. We gather data from the <a target="_blank"
+      href="http://www.atpworldtour.com/en/rankings/singles"> list of currently
+      ranked singles players</a> in the ATP (for the current season) and
+      display the most recent amount for each of the players on the list.
+      It is definitely interesting to see the data and confirm that the tennis
+      circuit is not friendly to most of the players.
+    </p>
 
     <canvas id="myChart"></canvas>
 
@@ -15,7 +22,15 @@
 
     <script>require("js/app").Charting.run()</script>
 
-    <ul>
-    </ul>
+    <p>Technical Details:</p>
+    <p>
+      This app is written in Elixir, uses Phoenix to handle web requests,
+      Postgres to persist the data and Chart.js to create the charts.  Here is
+      the <a target="_blank"
+      href="https://github.com/pdgonzalez872/atp_data_elixir">link </a> to the
+      source code. Created by <a
+      href="https://www.linkedin.com/in/pdgonzalez872/">Paulo Daniel
+      Gonzalez</a>.
+    </p>
   </div>
 </div>
