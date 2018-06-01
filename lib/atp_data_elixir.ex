@@ -31,15 +31,13 @@ defmodule AtpDataElixir do
 
     Logger.info("Fetching player data")
 
-
     list_of_players
-      |> Flow.from_enumerable()
-      |> Flow.partition(stages: 8)
-      |> Flow.map(fn player_url ->
-        PlayerPage.process_player(player_url)
-        |> persist_values()
+      |> Enum.map(fn player_url ->
+        PlayerPage.process_player(player_url) |> persist_values()
+
+        # wait for 1 second. Let's see if this avoids the timeout
+        :timer.sleep(1000)
       end)
-      |> Enum.to_list()
 
     Logger.info("Finished in #{DateTime.diff(DateTime.utc_now(), start_time)} seconds")
   end
