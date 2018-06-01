@@ -3,9 +3,9 @@ defmodule AtpDataElixir.EarningsAggregator do
 
   import Ecto.Query
 
-  # Persist this in a table, super quick displays.
-  # Sorted latest results. Each time we do a fetch it calls this function as well.
-
+  @doc ~S"""
+  Gets the latest earnings for each player.
+  """
   def get_latest_earnings_for_players do
     results =
       Player
@@ -22,6 +22,8 @@ defmodule AtpDataElixir.EarningsAggregator do
     results
   end
 
+  # TODO:
+  # https://github.com/pdgonzalez872/atp_data_elixir/issues/50
   def get_latest_earnings_for_player(player) do
     player_data = preload(Player, :earnings) |> Repo.get(player.id)
     latest_earnings = Enum.at(player_data.earnings, -1)
@@ -29,6 +31,8 @@ defmodule AtpDataElixir.EarningsAggregator do
     %{name: "#{player.first_name} #{player.last_name}", amount: latest_earnings.amount}
   end
 
+  # TODO:
+  # https://github.com/pdgonzalez872/atp_data_elixir/issues/50
   def get_and_persist_latest_earnings_for_players do
     encoded_json_object = get_latest_earnings_for_players()
     |> Jason.encode!
@@ -36,7 +40,9 @@ defmodule AtpDataElixir.EarningsAggregator do
     Repo.insert!(%LastEarning{results: encoded_json_object, date: DateTime.utc_now()})
   end
 
-  def get_latest_earnings do
+  # TODO:
+  # https://github.com/pdgonzalez872/atp_data_elixir/issues/50
+  def get_latest_earnings() do
     result = LastEarning
     |> Ecto.Query.last
     |> Repo.one
