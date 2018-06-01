@@ -31,11 +31,15 @@ defmodule AtpDataElixir do
 
     Logger.info("Fetching player data")
 
+
     list_of_players
-      |> Enum.map(fn player_url ->
+      |> Flow.from_enumerable()
+      |> Flow.partition(stages: 8)
+      |> Flow.map(fn player_url ->
         PlayerPage.process_player(player_url)
         |> persist_values()
       end)
+      |> Enum.to_list()
 
     Logger.info("Finished in #{DateTime.diff(DateTime.utc_now(), start_time)} seconds")
   end
