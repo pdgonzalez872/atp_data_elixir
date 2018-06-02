@@ -22,8 +22,8 @@
       the <a target="_blank"
       href="https://github.com/pdgonzalez872/atp_data_elixir">link </a> to the
       source code. Created by <a
-      href="https://www.linkedin.com/in/pdgonzalez872/">Paulo Daniel
-      Gonzalez</a>.
+      href="https://www.linkedin.com/in/pdgonzalez872/" target="_blank">
+      Paulo Daniel Gonzalez</a>.
     </p>
 
     <canvas id="myChart"></canvas>
