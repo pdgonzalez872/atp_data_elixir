@@ -3,7 +3,7 @@ require IEx
 defmodule PlayerPage do
   require Logger
 
-  @base_url "http://www.atpworldtour.com"
+  @base_url "https://www.atpworldtour.com"
 
   def process_player(url) do
     start_time = DateTime.utc_now()
