@@ -29,12 +29,12 @@ defmodule AtpDataElixir do
     Logger.info("Fetching player data")
 
     list_of_players
-      |> Flow.from_enumerable()
-      |> Flow.partition(stages: 8)
-      |> Flow.map(fn player_url ->
-        PlayerPage.process_player(player_url) |> persist_values()
-      end)
-      |> Enum.to_list()
+    |> Flow.from_enumerable()
+    |> Flow.partition(stages: 8)
+    |> Flow.map(fn player_url ->
+      PlayerPage.process_player(player_url) |> persist_values()
+    end)
+    |> Enum.to_list()
 
     Logger.info("Finished in #{DateTime.diff(DateTime.utc_now(), start_time)} seconds")
   end
@@ -63,7 +63,7 @@ defmodule AtpDataElixir do
 
     {amount, _} = Integer.parse(player_map.prize_money)
 
-    %Earning{amount: amount, player_id: player.id, date: DateTime.utc_now}
+    %Earning{amount: amount, player_id: player.id, date: DateTime.utc_now()}
     |> Repo.insert!()
   end
 end

@@ -1,5 +1,5 @@
 defmodule RankingPage do
-  @rankings_base_url "http://www.atpworldtour.com/en/rankings/singles?"
+  @rankings_base_url "https://www.atpworldtour.com/en/rankings/singles?"
   @rankings_rest_url "&rankRange=1-5000&countryCode=all"
 
   def process do
