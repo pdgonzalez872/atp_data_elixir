@@ -44,23 +44,6 @@ defmodule RankingPageTest do
 
       assert Enum.at(result, 0) == expected
     end
-
-    test "parses html and returns a list with the players urls - with the new ranking page 20180719" do
-      html_string =
-        Path.absname(Path.join(["test", "lib", "test_data", "rankings_page_20180719.html"]))
-        |> File.read!()
-
-      result = RankingPage.player_data(html_string)
-
-      expected =
-        {"a",
-         [
-           {"href", "/en/players/rafael-nadal/n409/overview"},
-           {"data-ga-label", "Rafael Nadal"}
-         ], ["Rafael Nadal"]}
-
-      assert Enum.at(result, 0) == expected
-    end
   end
 
   describe "parse_individual_element/1" do
