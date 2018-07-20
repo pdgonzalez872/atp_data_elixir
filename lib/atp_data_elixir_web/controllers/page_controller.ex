@@ -14,7 +14,7 @@ defmodule AtpDataElixirWeb.PageController do
     {chart_labels, chart_data} =
       player_data
       |> Enum.reduce({[], []}, fn el, {chart_labels, chart_data} ->
-        %{ amount: amount, name: name } = el
+        %{amount: amount, name: name} = el
         {chart_labels ++ [name], chart_data ++ [amount]}
       end)
 
