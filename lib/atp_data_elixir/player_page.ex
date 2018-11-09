@@ -20,7 +20,7 @@ defmodule PlayerPage do
   end
 
   def fetch_data(url) do
-    %{body: body} = HTTPoison.get!(url)
+    %{body: body} = HTTPoison.get!(url, [], [timeout: 500_000, recv_timeout: 30_000)
     body
   end
 
